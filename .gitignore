@@ -3,3 +3,4 @@ __pycache__
 pyvenv.cfg
 *.pyc
 .env
+.DS_Store
