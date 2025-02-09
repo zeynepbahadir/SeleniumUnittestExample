@@ -8,3 +8,11 @@ selections = {
 }
 
 main_page = "https://www.stepstone.de/"
+
+connection_info = {
+    "host": "127.0.0.1",  # use the service name from docker-compose
+    "dbname": "postgres",
+    "user": "postgres",
+    "password": "postgres",
+    "port": 5432
+}

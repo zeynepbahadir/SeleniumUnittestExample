@@ -1,19 +1,23 @@
 import psycopg2
+from ..cfg import connection_info
 
 class DB:
     def __init__(self):
         self.conn = psycopg2.connect(
-            host="127.0.0.1",  # use the service name from docker-compose
-            dbname="postgres",
-            user="postgres",
-            password="postgres",
-            port=5432
+            host= connection_info["host"],
+            dbname= connection_info["dbname"],
+            user= connection_info["user"],
+            password= connection_info["password"],
+            port= connection_info["port"]
         )
 
         self.cur = self.conn.cursor()
 
+        self.cur.execute("""SELECT truncate_if_exists('job_elements');""")
+        self.conn.commit()
+
     def create_table(self):
-        #create table
+        #create the table
         self.cur.execute("""CREATE TABLE IF NOT EXISTS job_elements (
             id INT PRIMARY KEY,
             job_title VARCHAR(255),
@@ -23,16 +27,8 @@ class DB:
         """)
         self.conn.commit()
 
-    #cur.execute("""INSERT INTO job_elements (id, job_title, job_place) VALUES 
-    #    (1, 'abc', 'def'),
-    #    (2, 'ghi', 'jkl');
-    #""")
-
-    #cur.execute("""SELECT * FROM job_elements""")
-    #for row in cur.fetchall():
-    #    print(row)
-
     def write_db(self, id, job_title, job_place, job_link):
+        #writing given job info to table
         write_query = self.cur.mogrify("""INSERT INTO job_elements (id, job_title, job_place, job_link) VALUES
             (%s, %s, %s, %s);
         """, (id, job_title, job_place, job_link))
