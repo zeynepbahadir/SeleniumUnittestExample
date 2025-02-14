@@ -36,6 +36,30 @@ SeleniumUnittestExample/
 │   └── test_stepstone.py #unit tests
 └── requirements.txt #project dependencies
 
+├── source/
+│ ├── init.py
+│ ├── stepstone.py # Main scraper implementation
+│ ├── config/
+│ │ ├── init.py
+│ │ ├── db_config.py # Database configuration
+│ │ └── cfg.py # General configuration
+│ ├── utils/
+│ │ ├── init.py
+│ │ ├── cookie_handle.py # Cookie management
+│ │ └── continue_next_page.py # Navigation utilities
+│ ├── selection_handle/
+│ │ ├── init.py
+│ │ ├── selection.py # Search criteria selection
+│ │ └── logging_in.py # Authentication handling
+│ └── fetching_job_info/
+│ ├── init.py
+│ ├── fetch_job_properties.py # Job data extraction
+│ └── db.py # Database operations
+├── tests/
+│ ├── init.py
+│ └── test_stepstone.py # Unit tests
+└── requirements.txt # Project dependencies
+
 ## Prerequisites
 - Python 3.8+
 - PostgreSQL database
